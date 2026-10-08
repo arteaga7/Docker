@@ -1,7 +1,6 @@
 import os
 import psycopg2
 
-load_env()
 
 def conectar_y_consultar():
     print("Intentando conectar a PostgreSQL desde el contenedor Python...")

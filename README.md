@@ -2,27 +2,26 @@
 
 
 ## ✨ Details
+PostgreSQL iniciará primero, validará que esté listo y ejecutará el script init.sql.
 
+Python App arrancará automáticamente después, se conectará a la base de datos e imprimirá los registros en tu consola.
+
+Jupyter Notebook iniciará en segundo plano. Podrás acceder a él abriendo en tu navegador el enlace que aparece en la terminal (incluye un token de seguridad generado por Jupyter, por ejemplo: [http://127.0.0.1:8888/?token=](http://127.0.0.1:8888/?token=)...).
 
 ## 🌎 Structure
-
 ```
-Simple-Agent/
-├── main.py                 # Entrypoint, FastAPI app. Creates tables and seeds catalog on startup
-├── app.py                  # Streamlit chat client
-├── bot/
-│   ├── config.py           # settings (lm model, api url, databse url, etc.)
-│   ├── prompts.py          # promts
-│   ├── api/                # routes (/chat, /health) + request schemas
-│   ├── db/                 # SQLAlchemy engine, models, seed
-│   ├── agent/              # llm client, conversation memory, tool-calling loop
-│   └── tools/              # catalog / inventory / orders tools + registry
-├── img/                    # Some pictures
-├── Dockerfile
-├── docker-compose.yml      # db (postgres) + api + ui
-└── requirements.txt
-└── .env                    # Contains API Key (not provided)
-└── start.sh                # For deploying to Render.com
+Docker/
+└── jupyter/
+    └── Dockerfile
+    └── notebook.ipynb
+├── postgres/
+    └── init.sql
+├── python/
+    └── Dockerfile
+    └── requirements.txt
+    └── app.py
+└── .env                    # Contains postgres settings (not provided)
+└── compose.yml
 ```
 
 ## ⚙️ Configuration
@@ -41,12 +40,20 @@ Simple-Agent/
 
 ## 🚀 Run with Docker
 1. Clone and create .env file, as explained in 'Configuration' section.
-2. Start everything (Postgres + Python + Jupyter):
+2. Start everything (Postgres + Python + Jupyter) with the following command (first time only):
    ```bash
    docker compose up --build
    ```
 3. Open the UI at <http://localhost:8501>. 
+4. Close everything with:
+   ```bash
+   docker compose down
+   ```
 
+If Docker is not running, use:
+   ```bash
+   sudo systemctl start docker
+   ```
 
 
 ## 🎯 Results
