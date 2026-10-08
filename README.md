@@ -50,7 +50,7 @@ Docker/
    docker compose down
    ```
 
-If Docker is not running, use:
+   If Docker is not running, use (linux):
    ```bash
    sudo systemctl start docker
    ```
