@@ -4,9 +4,9 @@ import psycopg2
 # Cargar las variables desde el entorno (inyectadas por el archivo .env)
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "mi_base_datos")
-POSTGRES_USER = os.getenv("POSTGRES_USER", "mi_usuario")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "mi_password")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "db_1")
+POSTGRES_USER = os.getenv("POSTGRES_USER", "admin")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "1234")
 
 def conectar_y_consultar():
     print("Intentando conectar a PostgreSQL desde el contenedor Python...")
@@ -21,12 +21,10 @@ def conectar_y_consultar():
         cursor = conexion.cursor()
         print("¡Conexión exitosa a PostgreSQL!\n")
 
-        cursor.execute("SELECT id, nombre, correo, fecha_registro FROM usuarios;")
+        id = 1
+        cursor.execute("SELECT * FROM usuarios WHERE id = %s;", (id,))
         resultados = cursor.fetchall()
-        
-        print("Registros encontrados en la tabla 'usuarios':")
-        for fila in resultados:
-            print(f" - ID: {fila[0]} | Nombre: {fila[1]} | Correo: {fila[2]} | Fecha: {fila[3]}")
+        print(resultados)
 
         cursor.close()
         conexion.close()

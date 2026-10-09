@@ -49,6 +49,11 @@ Docker/
    ```bash
    docker compose down
    ```
+   
+   To delete a volume (Warning, all data will be deleted):
+   ```bash
+   docker compose down -v
+   ```
 
    If Docker is not running, use (linux):
    ```bash
