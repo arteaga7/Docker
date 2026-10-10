@@ -121,5 +121,7 @@ The `python` container may exit after completing its task; this is compatible wi
 The services share the `app_network` network. To connect an application inside a container to PostgreSQL, use the service name `postgres` as the host and port `5432`. Do not use `localhost` as the PostgreSQL host from another container, because `localhost` refers to the container itself.
 
 ## 🔎 Inspect the database
-To connect to the database, 
-![alt text](f1.png)
+To connect to the database, use DBeaver (recommended) and create a new postgreSQL database connection:
+![alt text](./img/f1.png)
+
+![alt text](./img/f2.png)
