@@ -1,9 +1,7 @@
 # Docker: PostgreSQL, FastAPI, Jupyter Notebook and Python
-
 A sample project that runs four services using Docker Compose and allows them to communicate within a shared Docker network.
 
 ## ✨ Services
-
 - **PostgreSQL 17 (`postgres`)**: Persistent database. It uses the environment variables defined in `.env` and executes `postgres/init.sql` when initializing a new database.
 - **FastAPI (`web_api`)**: API built from `./fastapi`, available at `http://localhost:8000`.
 - **Jupyter Notebook (`jupyter`)**: Interactive environment available at `http://localhost:8888`, with files from `./jupyter` mounted at `/home/jovyan/work`.
@@ -14,7 +12,6 @@ The four services connect to the `app_network` network. The Python, FastAPI, and
 > **Important:** The current Jupyter configuration disables the token and password. This is an insecure configuration for shared machines or networks; use it only in a trusted local environment and enable authentication if you expose the service to others.
 
 ## 🌎 Structure
-
 ```text
 Docker/
 ├── fastapi/
@@ -52,7 +49,7 @@ POSTGRES_PORT=5432
 
 `POSTGRES_HOST=postgres` is the name of the PostgreSQL service within the Docker network. From other containers, use `postgres:5432`; from the host machine, use `localhost:5432`.
 
-## 🚀 Run
+## 🚀 Installation
 1. Clone and create .env file, as explained in 'Configuration' section.
 
 2. Start everything (Postgres + FastAPI + Jupyter + Python) with the following command (first time only):
@@ -113,7 +110,7 @@ docker compose logs -f jupyter
 
 The `python` container may exit after completing its task; this is compatible with `restart: "no"`.
 
-## 🗄️ Persistencia e inicialización de PostgreSQL
+## 🗄️ PostgreSQL persistence and initialization
 
 - The `postgres_data` volume persists PostgreSQL data across container restarts and recreations.
 - The `./postgres/init.sql` file is mounted to `/docker-entrypoint-initdb.d/init.sql`.
@@ -121,9 +118,8 @@ The `python` container may exit after completing its task; this is compatible wi
 - To start from scratch, you can remove the volume using `docker compose down -v`; note that you will lose the stored data.
 
 ## 🔗 Communication between containers
-
 The services share the `app_network` network. To connect an application inside a container to PostgreSQL, use the service name `postgres` as the host and port `5432`. Do not use `localhost` as the PostgreSQL host from another container, because `localhost` refers to the container itself.
 
-## 🎯 Resultados
-
-Cuando los servicios estén activos, podrás probar la API en Swagger UI y abrir Jupyter Notebook en el navegador. La aplicación Python ejecutará el código definido en `python/app.py`; su comportamiento concreto depende de la implementación de ese archivo.
+## 🔎 Inspect the database
+To connect to the database, 
+![alt text](f1.png)
